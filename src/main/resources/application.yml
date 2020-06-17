@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /auth
+
+#user:
+#    oauth:
+#      clientId: R2dpxQ3vPrtfgF72
+#      clientSecret: fDw7Mpkk5czHNuSRtmhGmAGL42CaxQB9
+#      redirectUris: http://localhost:8082/login/oauth2/code/
+#      user:
+#        username: abc
+#        password: 123
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: *
+
+---
+spring:
+  profiles: default
+  application:
+    name: animalgame
+
+  data:
+    mongodb:
+      #uri: mongodb://gameabc:animal123@ds159631.mlab.com:59631/animal-game?retryWrites=false
+      uri: mongodb://game-app-1:game_on_123@ds143293.mlab.com:43293/game-on?retryWrites=false
+
+origins: http://localhost:3000, http://192.168.0.106:3000
+---
+spring:
+  profiles: prod
+  application:
+    name: animalgame
+
+  data:
+    mongodb:
+      uri: ${MONGO_URL}
+
+origins: ${FRONTEND_URL}
