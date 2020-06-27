@@ -15,13 +15,16 @@ phases:
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
+      - echo docker ps
+      - sudo docker ps
       - echo Build started on `date`
       - echo building the Jar file
       - mvn clean install
       #- mvn package
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:latest .
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+      - sudo docker build -t $REPOSITORY_URI:latest .
+      - sudo docker images
+      - sudo docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Build completed on `date`
